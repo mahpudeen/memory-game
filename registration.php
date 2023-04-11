@@ -135,11 +135,8 @@
                 }
             }
             echo "<div id='finished' data-value='" . $finished . "'></div>";
-
         ?>
         </div>
-        
-        
     </div>
     <script>
         const backgrounds = ["yellow.png", "red.png", "green.png"];
@@ -182,7 +179,7 @@
             moveHome();
         }
         function moveHome() {
-            window.location.href = '/pair4/index.php';
+            window.location.href = '/index.php';
         }
     </script>
 </body>

@@ -16,34 +16,34 @@
     <?php
         include('navbar.php');
         header("Cache-Control: no-cache, must-revalidate");
-        
+
         session_start();
         $username = $_SESSION['username'];
         $isLoggedIn = isset($_SESSION['username']);
 
-        // Terima data yang dikirimkan dari JavaScript
+        // Receive data sent from JavaScript
         $data = json_decode(file_get_contents('php://input'), true);
 
-        // Proses data di sini
+        // Process the data here
         $points = $data['points'];
         if($points) {
             $max_elements = 5;
 
-            // Data yang akan disimpan
+            // Data to be stored
             $leaderboard_data = $_SESSION['leaderboard'];
 
-            // Tambahkan data baru
+            // Add new data
             $new_data = array('username' => $username, 'point' => $points);
             $leaderboard_data[] = $new_data;
 
-            // Urutkan $leaderboard_data berdasarkan point
+            // Sort $leaderboard_data by point
             usort($leaderboard_data, function($a, $b) {
                 return $b['point'] - $a['point'];
             });
 
-            // Cek apakah jumlah elemen di dalam $leaderboard_data lebih besar dari batas maksimum
+            // Check if the number of elements in $leaderboard_data is greater than the maximum limit
             if (count($leaderboard_data) > $max_elements) {
-                // Jika ya, hapus elemen terakhir
+                // If yes, remove the last element
                 array_pop($leaderboard_data);
             }
 
@@ -52,15 +52,13 @@
             exit();
         }
 
-        // Kirim respons kembali ke JavaScript
+        // Send response back to JavaScript
         $response = array('status' => 'success');
         echo json_encode($response);
-    ?>
-    <?php
-    // Generate HTML code for a div with a data-value attribute
-    echo "<div id='user-data' data-value='" . $isLoggedIn . "'></div>";
-    ?>
 
+        // Generate HTML code for a div with a data-value attribute
+        echo "<div id='user-data' data-value='" . $isLoggedIn . "'></div>";
+    ?>
     <div id="main">
         <div class="wrap-container">
             <div class="wrapper">
@@ -70,7 +68,6 @@
                     <p id="point"></p>
                 </div>
                 <div class="game-container"></div>
-                <!-- <button id="stop" class="hide">Stop Game</button> -->
             </div>
         </div>
         <div class="controls-container">

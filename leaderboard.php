@@ -53,8 +53,6 @@
     <?php
         include('navbar.php');
         session_start();
-        
-        // unset($_SESSION['leaderboard']);
         $leaderboard_data = $_SESSION['leaderboard'];
     ?>
 	<div id="main" class="default-container">

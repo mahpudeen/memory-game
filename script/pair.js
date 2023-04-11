@@ -4,7 +4,6 @@ const point = document.getElementById("point");
 const startButton = document.getElementById("start");
 const submitButton = document.getElementById("submit");
 const mainData = document.getElementById("user-data");
-// const stopButton = document.getElementById("stop");
 const gameContainer = document.querySelector(".game-container");
 const result = document.getElementById("result");
 const controls = document.querySelector(".controls-container");
@@ -26,9 +25,11 @@ function setRandomItems() {
     let newItem = {};
     newItem.name = "image" + (i+1);
 
+    // set the smile randomly and unique from the available options
     let uniqueSmile = getRandomUnique(smiles, items.map(item => item.smile));
     newItem.smile = "img/" + uniqueSmile;
 
+    // set the eye randomly and unique from the available options
     let uniqueEye = getRandomUnique(eyes, items.map(item => item.eye));
     newItem.eye = "img/" + uniqueEye;
 
@@ -45,10 +46,10 @@ function getRandomUnique(options, usedOptions) {
   return availableOptions[randomIndex];
 }
 
-
 //Initial Time
 let seconds = 0,
   minutes = 0;
+
 //Initial moves and win count
 let movesCount = 0,
   winCount = 0;
@@ -120,9 +121,6 @@ const matrixGenerator = (cardValues, size = 5) => {
      </div>
      `;
   }
-  // <img src="${cardValues[i].image}" class="image"/>
-  //Grid
-  // gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
 
   //Cards
   cards = document.querySelectorAll(".card-container");
@@ -211,7 +209,6 @@ function startGame() {
   startTime = Date.now();
   //controls amd buttons visibility
   controls.classList.add("hide");
-  // stopButton.classList.remove("hide");
   startButton.classList.add("hide");
   //Start timer
   interval = setInterval(timeGenerator, 1000);
@@ -224,13 +221,6 @@ function startGame() {
 startButton.addEventListener("click", () => {
   startGame();
 });
-
-//Stop game
-// stopButton.addEventListener(
-//   "click",function() {
-//     stopGame();
-//   }
-// );
 
 // Submit score
 submitButton.addEventListener("click", () => {
@@ -247,7 +237,7 @@ submitButton.addEventListener("click", () => {
     if (xhr.readyState === 4 && xhr.status === 200) {
       // Response from PHP success
       // var response = JSON.parse(xhr.responseText);
-      window.location.href = '/pair4/leaderboard.php';
+      window.location.href = '/leaderboard.php';
     }
   };
   xhr.send(JSON.stringify(dataToSend));

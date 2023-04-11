@@ -53,13 +53,13 @@
                 <li><a href="pairs.php" name="memory">Play Pairs</a></li>
                 <?php
                     session_start();
-                    // check if user has registered a profile
                     $username = "";
                     $json_data = "";
                     $data = "";
                     if(isset($_SESSION['username'])) {
                         $username = $_SESSION['username'];
                     }
+                    // check if user has registered a profile
                     if ($username) {
                         echo '<li><a href="leaderboard.php" name="leaderboard">Leaderboard</a></li>';
                         if(isset($_SESSION['avatar'])) {
